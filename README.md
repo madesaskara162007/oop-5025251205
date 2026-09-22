@@ -54,8 +54,8 @@ dotnet test pertemuan-03/tests -v normal
 ---
 
 ## Identitas
-- Nama: (tulis di sini)
-- NRP: (tulis di sini)
-- Kelas: (tulis di sini)
+- Nama: I Made Saskara Bawa
+- NRP: 5025251205
+- Kelas: PBO F
 
 Bagian di atas diisi sekali di awal semester. Kalau pertemuan mendatang butuh section reflektif baru di README ini (heading yang dicek otomatis lewat test), section itu akan ditambahkan di sini — jangan ganti nama heading yang sudah ada.
