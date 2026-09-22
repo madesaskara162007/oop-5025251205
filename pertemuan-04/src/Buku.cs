@@ -65,7 +65,10 @@ public class Buku
         // TODO(Level 4): tambah StokTersedia satu. Kalau stok sudah sama dengan
         //   StokTotal (tidak ada yang sedang dipinjam), lempar
         //   InvalidOperationException dan biarkan stok tetap.
-        throw new NotImplementedException("Level 4 belum diimplementasikan");
+        if (_stokTersedia == _stokTotal)
+            throw new InvalidOperationException("Semua buku sudah tersedia.");
+
+        _stokTersedia++;
     }
 
     // Level 5: properti TERHITUNG -- tanpa field pendukung, tanpa setter.
