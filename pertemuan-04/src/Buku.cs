@@ -54,7 +54,10 @@ public class Buku
     {
         // TODO(Level 3): kurangi StokTersedia satu. Kalau stok sudah 0, lempar
         //   InvalidOperationException dan biarkan stok tetap.
-        throw new NotImplementedException("Level 3 belum diimplementasikan");
+        if (_stokTersedia == 0)
+            throw new InvalidOperationException("Stok buku habis.");
+
+        _stokTersedia--;
     }
 
     public void Kembalikan()
