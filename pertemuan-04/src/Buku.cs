@@ -44,7 +44,22 @@ public class Buku
         if (stokTotal < 0)
             throw new ArgumentOutOfRangeException(nameof(stokTotal), "Stok tidak boleh negatif.");
 
-        _isbn = isbn;
+        var isbnBersih = isbn?.Replace("-", "").Replace(" ", "");
+        if (isbnBersih is null || isbnBersih.Length != 13 ||
+            isbnBersih.Any(digit => digit < '0' || digit > '9'))
+            throw new ArgumentException("ISBN harus terdiri dari 13 digit.", nameof(isbn));
+
+        var jumlahChecksum = 0;
+        for (var indeks = 0; indeks < isbnBersih.Length; indeks++)
+        {
+            var digit = isbnBersih[indeks] - '0';
+            jumlahChecksum += digit * (indeks % 2 == 0 ? 1 : 3);
+        }
+
+        if (jumlahChecksum % 10 != 0)
+            throw new ArgumentException("Checksum ISBN tidak valid.", nameof(isbn));
+
+        _isbn = isbnBersih;
         _judul = judul;
         _stokTotal = stokTotal;
         _stokTersedia = stokTotal;
