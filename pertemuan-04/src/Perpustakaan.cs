@@ -12,7 +12,9 @@ public class Perpustakaan
     //   (List<Buku>) dan ekspos DaftarBuku sebagai properti read-only bertipe
     //   IReadOnlyList<Buku> (atau IReadOnlyCollection/IEnumerable) yang tidak
     //   bisa dipakai untuk mengubah koleksi asli.
-    public List<Buku> DaftarBuku = new();
+    private readonly List<Buku> _daftarBuku = new();
+
+    public IReadOnlyList<Buku> DaftarBuku => _daftarBuku.AsReadOnly();
 
     public int JumlahJudul => DaftarBuku.Count;
 
@@ -21,14 +23,19 @@ public class Perpustakaan
         // TODO(Level 7): buku null -> ArgumentNullException; ISBN yang sudah ada
         //   di koleksi -> InvalidOperationException; selain itu tambahkan ke
         //   koleksi.
-        throw new NotImplementedException("Level 7 belum diimplementasikan");
+        ArgumentNullException.ThrowIfNull(buku);
+
+        if (_daftarBuku.Any(item => item.Isbn == buku.Isbn))
+            throw new InvalidOperationException("ISBN sudah terdaftar.");
+
+        _daftarBuku.Add(buku);
     }
 
     public Buku? Cari(string isbn)
     {
         // TODO(Level 7): kembalikan buku dengan Isbn yang sama persis (apa
         //   adanya, tanpa normalisasi), atau null kalau tidak ada.
-        throw new NotImplementedException("Level 7 belum diimplementasikan");
+        return _daftarBuku.FirstOrDefault(item => item.Isbn == isbn);
     }
 
     public void PinjamBuku(string isbn, AkunAnggota akun)
